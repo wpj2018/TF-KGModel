@@ -84,7 +84,7 @@ class DataUtil:
         freq_report = 1
 
         for epoch in range(1, self.epochs+1):
-            eval_batches = self.get_batch('train', shuffle=False)
+            eval_batches = self.get_batch('train', shuffle=True)
 
             losses = []
             for b_itx, (data_batch, label) in enumerate(eval_batches):

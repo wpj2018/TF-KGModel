@@ -6,7 +6,7 @@ import os
 import logging
 
 from datautil import DataUtil
-from model import Model
+from model import *
 
 
 def parse_args():
@@ -36,6 +36,12 @@ def parse_args():
 
     parser.add_argument('--epochs', type=int, default=500, help='num of relation')
 
+    parser.add_argument('--label_smoothing', type=float, default=0.1, help='label_smoothing')
+    parser.add_argument('--in_channels', type=int, default=1, help='in_channels')
+    parser.add_argument('--out_channels', type=int, default=32, help='out_channels')
+    parser.add_argument('--filt_h', type=int, default=1, help='filter_h')
+    parser.add_argument('--filt_w', type=int, default=9, help='filter_w')
+
     return parser.parse_args()
 
 
@@ -47,5 +53,5 @@ if __name__ == '__main__':
     datautil = DataUtil(args)
     args.entity_num = len(datautil.entities)
     args.relation_num = len(datautil.relations)
-    model = Model(args)
+    model = ConvE(args)
     datautil.train(model)
